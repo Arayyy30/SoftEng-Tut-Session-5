@@ -14,7 +14,7 @@ def test_carry_on():
     assert validate_baggage(7, "carry-on", "economy", "domestic", hazardous_item=False) == _SUCCESS_MESSAGES["domestic"]
     assert validate_baggage(7, "carry-on", "business", "domestic", hazardous_item=False) == _SUCCESS_MESSAGES["domestic"]
     assert validate_baggage(8, "carry-on", "economy", "domestic", hazardous_item=False) == _FAILED_MESSAGES["overweight"]
-    assert validate_baggage(8, "carry-on", "business", "domestic", hazardous_item=False) == _FAILED_MESSAGES["overweight"]
+    assert validate_baggage(8, "carry-on", "business", "domestic", hazardous_item=False) == _SUCCESS_MESSAGES["domestic"]
 
 def test_hazardous_item_prohibited():
     assert validate_baggage(5, "carry-on", "economy", "domestic", hazardous_item=True) == _FAILED_MESSAGES["hazardous"]
@@ -26,10 +26,10 @@ def test_flight_type():
     # assert validate_baggage(30, "checked", "economy", "international", hazardous_item=False) == _SUCCESS_MESSAGES["international"]
 
 def test_checked_business_allowance():
-    assert validate_baggage(-1, "carry-on", "business", "domestic", hazardous_item=False) == True
-    assert validate_baggage(-1, "carry-on", "business", "domestic", hazardous_item=False) == False
-    assert validate_baggage(17, "carry-on", "business", "domestic", hazardous_item=False) == True
-    assert validate_baggage(18, "carry-on", "business", "domestic", hazardous_item=False) == False
-    assert validate_baggage(40, "checked", "business", "domestic", hazardous_item=False) == True
-    assert validate_baggage(41, "checked", "business", "domestic", hazardous_item=False) == False
+    assert validate_baggage(-1, "carry-on", "business", "domestic", hazardous_item=False) == _FAILED_MESSAGES["invalid"]
+    assert validate_baggage(-1, "carry-on", "business", "domestic", hazardous_item=False) == _FAILED_MESSAGES["invalid"]
+    assert validate_baggage(17, "carry-on", "business", "domestic", hazardous_item=False) == _SUCCESS_MESSAGES["domestic"]
+    assert validate_baggage(18, "carry-on", "business", "domestic", hazardous_item=False) == _FAILED_MESSAGES["overweight"]
+    assert validate_baggage(40, "checked", "business", "domestic", hazardous_item=False) == _SUCCESS_MESSAGES["domestic"]
+    assert validate_baggage(41, "checked", "business", "domestic", hazardous_item=False) == _FAILED_MESSAGES["overweight"]
     
